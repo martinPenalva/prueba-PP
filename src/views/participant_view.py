@@ -500,6 +500,26 @@ class ParticipantView:
         buttons_frame = tk.Frame(content, bg=COLORS['white'])
         buttons_frame.pack(pady=(20, 0))
         
+        # Botón Agregar Evento (solo para admin)
+        if self.is_admin:
+            def add_event_and_close():
+                modal.destroy()
+                self.add_to_event(participant.participant_id, self.parent)
+            
+            btn_add_event = tk.Button(
+                buttons_frame,
+                text="➕ Agregar Evento",
+                font=("Arial", 10, "bold"),
+                bg="#10b981",
+                fg="white",
+                relief=tk.FLAT,
+                cursor="hand2",
+                padx=24,
+                pady=10,
+                command=add_event_and_close
+            )
+            btn_add_event.pack(side=tk.LEFT, padx=(0, 10))
+        
         # Botón Editar (solo para admin)
         if self.is_admin:
             def edit_and_close():
@@ -895,21 +915,7 @@ class ParticipantView:
         footer = tk.Frame(modal, bg=COLORS['table_header'])
         footer.pack(fill=tk.X, padx=18, pady=(0, 14))
         
-        btn_add = tk.Button(
-            footer,
-            text="Agregar a evento",
-            font=("Arial", 9),
-            bg=COLORS['white'],
-            fg="#374151",
-            relief=tk.SOLID,
-            borderwidth=1,
-            padx=14,
-            pady=7,
-            cursor="hand2",
-            command=lambda: self.add_to_event(participant_id, modal)
-        )
-        btn_add.pack(side=tk.LEFT)
-        
+        # Solo botón cerrar - este modal es solo para visualizar inscripciones
         btn_close = tk.Button(
             footer,
             text="Cerrar",
@@ -975,8 +981,10 @@ class ParticipantView:
                 if registration_id:
                     messagebox.showinfo("Éxito", f"Participante inscrito en '{selected_event.title}'")
                     selection_modal.destroy()
-                    parent_modal.destroy()
-                    self.show_inscriptions_modal()  # Recargar
+                    if parent_modal:
+                        parent_modal.destroy()
+                    # Recargar la vista de participantes para actualizar el número de eventos
+                    self.load_participants()
                 else:
                     messagebox.showerror("Error", "No se pudo inscribir al participante (evento lleno o ya inscrito)")
         

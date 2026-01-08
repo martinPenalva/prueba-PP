@@ -110,6 +110,9 @@ Tkinter se ha utilizado como framework para el desarrollo de la interfaz gráfic
 
 MySQL ha sido utilizado como sistema de gestión de bases de datos relacionales (RDBMS) para almacenar toda la información de la aplicación, incluyendo usuarios, eventos, participantes e inscripciones.
 
+![Logotipo de MySQL](PROYECTO_FINAL_IMAGENES/logotipo_MYSQL.png)
+*Figura: Logotipo oficial de MySQL*
+
 **Características principales:**
 - **Base de Datos Relacional:** MySQL nos ha permitido diseñar un esquema de base de datos normalizado con tablas relacionadas mediante claves foráneas, garantizando la integridad referencial y la consistencia de los datos.
 - **Esquema de Base de Datos:** Hemos diseñado un esquema que incluye las tablas: `users` (usuarios), `events` (eventos), `participants` (participantes), `event_registrations` (inscripciones) y `audit_logs` (logs de auditoría), con sus respectivas relaciones y restricciones.
@@ -159,6 +162,9 @@ MySQL Connector Python ha sido la librería utilizada para establecer la comunic
 
 bcrypt ha sido utilizado para el hash seguro de contraseñas de usuarios, garantizando que las contraseñas nunca se almacenen en texto plano en la base de datos.
 
+![Logotipo de bcrypt](PROYECTO_FINAL_IMAGENES/logo_bcrypt.png)
+*Figura: Logotipo de bcrypt*
+
 **Características principales:**
 - **Hash Seguro de Contraseñas:** bcrypt implementa el algoritmo bcrypt, un algoritmo de hash criptográfico diseñado específicamente para contraseñas, que incluye salting automático y es resistente a ataques de fuerza bruta.
 - **Verificación de Contraseñas:** bcrypt nos ha permitido verificar contraseñas de manera segura comparando el hash almacenado con el hash de la contraseña introducida, sin necesidad de almacenar la contraseña en texto plano.
@@ -167,6 +173,9 @@ bcrypt ha sido utilizado para el hash seguro de contraseñas de usuarios, garant
 #### 2.1.6. ReportLab
 
 ReportLab ha sido utilizado para la generación de documentos PDF a partir de los datos de la aplicación, permitiendo exportar eventos, participantes e inscripciones en formato PDF.
+
+![Logotipo de ReportLab](PROYECTO_FINAL_IMAGENES/logotipo_reportlab.png)
+*Figura: Logotipo de ReportLab*
 
 **Características principales:**
 - **Generación de PDFs:** ReportLab nos ha permitido crear documentos PDF profesionales con tablas, texto formateado, encabezados y pies de página, proporcionando una solución completa para la exportación de datos.
@@ -248,6 +257,9 @@ Para proporcionar una visión más clara y detallada de las fases del proyecto, 
 Durante esta fase, se asignaron los primeros días para realizar un análisis detallado de los requisitos del proyecto. Se definieron los objetivos y alcance del proyecto. Posteriormente, se dedicaron sesiones de trabajo a recopilar y documentar los requisitos específicos del proyecto, lo que incluyó investigación de herramientas a usar.
 
 Una vez definidas las tecnologías, se procedió al diseño de la arquitectura de la aplicación siguiendo el patrón MVC, definiendo claramente las responsabilidades de cada capa. Simultáneamente, se diseñó el esquema de la base de datos, identificando las entidades principales (usuarios, eventos, participantes, inscripciones) y sus relaciones.
+
+![Diagrama de Arquitectura](PROYECTO_FINAL_IMAGENES/diagrama.png)
+*Figura: Diagrama de arquitectura del sistema mostrando las capas MVC y las relaciones entre componentes*
 
 ### 3.2. Fase 2: Desarrollo Frontend y Backend
 
