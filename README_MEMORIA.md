@@ -32,6 +32,9 @@
 
 ## Introducción
 
+![Icono de la Aplicación](PROYECTO_FINAL_IMAGENES/ICONO_APLICACION.png)
+*Figura: Icono de la aplicación Gestor de Eventos Locales*
+
 En la actualidad, la gestión de eventos locales se ha convertido en una necesidad fundamental para organizaciones, ayuntamientos y entidades que buscan coordinar actividades, talleres, conferencias y eventos de diversa índole dentro de sus comunidades. Este escenario plantea desafíos significativos para los gestores, quienes se enfrentan a la dificultad de centralizar la información de participantes, gestionar inscripciones, controlar aforos y mantener un registro organizado de todos los eventos programados.
 
 La complejidad aumenta cuando múltiples usuarios necesitan trabajar simultáneamente sobre los mismos datos, lo que puede generar conflictos, pérdida de información o inconsistencias en los registros. Además, la necesidad de generar informes y reportes para la distribución y archivo de información requiere herramientas que faciliten la exportación de datos en formatos estándar como CSV y PDF.
@@ -79,7 +82,15 @@ Python ha sido fundamental para el desarrollo de este proyecto. Desde las etapas
 
 **Características principales:**
 - **Lenguaje de Programación:** Python 3.8+ se ha utilizado como lenguaje principal para el desarrollo de toda la aplicación, aprovechando sus características de programación orientada a objetos, tipado dinámico y sintaxis clara y legible.
+
+![Logotipo de Python](PROYECTO_FINAL_IMAGENES/logotipo_python.png)
+*Figura: Logotipo oficial de Python*
+
 - **Edición de Código:** Se ha utilizado Visual Studio Code como editor principal, proporcionando funciones avanzadas como resaltado de sintaxis, completado automático, depuración integrada y gestión de extensiones.
+
+![Editor de Código Python en Visual Studio Code](PROYECTO_FINAL_IMAGENES/ejemplo_editor_Ejemplo del Editor de Código Python en Visual Studio Code.png)
+*Figura: Ejemplo del editor Visual Studio Code mostrando código Python con resaltado de sintaxis*
+
 - **Estructura del Proyecto:** Python nos ha permitido organizar el código en módulos y paquetes siguiendo el patrón MVC (Modelo-Vista-Controlador), facilitando la mantenibilidad y escalabilidad del proyecto.
 
 #### 2.1.2. Tkinter
@@ -88,6 +99,10 @@ Tkinter se ha utilizado como framework para el desarrollo de la interfaz gráfic
 
 **Características principales:**
 - **Interfaz Gráfica Nativa:** Tkinter es la biblioteca estándar de Python para desarrollo de interfaces gráficas, lo que nos ha permitido crear ventanas, formularios, tablas y componentes interactivos sin necesidad de dependencias externas adicionales.
+
+![Logotipo Tkinter](PROYECTO_FINAL_IMAGENES/logotipo_thinker.png)
+*Figura: Logotipo de Tkinter*
+
 - **Diseño de Ventanas:** Tkinter proporciona un conjunto completo de widgets (botones, etiquetas, campos de texto, tablas, etc.) que hemos utilizado para diseñar una interfaz intuitiva y funcional.
 - **Personalización y Estilos:** Aunque Tkinter tiene un aspecto visual básico, hemos logrado personalizar la interfaz mediante el uso de colores, fuentes y layouts personalizados para crear una experiencia de usuario moderna y atractiva.
 
@@ -255,15 +270,24 @@ Simultáneamente, se ha trabajado en el backend de la aplicación, configurando 
 
 Durante esta fase inicial, me centré en diseñar la ventana de login, la cual es la primera interfaz que ve el usuario al abrir la aplicación. Se estableció su estructura para validar credenciales y gestionar el acceso a la aplicación.
 
+![Ventana de Login](PROYECTO_FINAL_IMAGENES/login.png)
+*Figura: Ventana de login de la aplicación en ejecución*
+
 ![Método start](PROYECTO_FINAL_IMAGENES/metodo_start.png)
 *Figura: Método start() que inicia la aplicación mostrando la ventana de login*
 
 ![Método on_login_success](PROYECTO_FINAL_IMAGENES/on_login_success___1.png)
 *Figura: Método on_login_success() que gestiona el acceso tras el login exitoso*
 
+![Ventana de Registro](PROYECTO_FINAL_IMAGENES/registrarse.png)
+*Figura: Ventana de registro de nuevos usuarios*
+
 #### Etapa 2: Diseño de la Ventana Principal
 
 Después de definir la ventana de login, se procedió al diseño de la ventana principal. Esta pantalla es crucial ya que es el centro de control de toda la aplicación. Se dedicó especial atención a la disposición de los elementos de la interfaz de usuario, incluyendo un menú lateral para la navegación entre diferentes secciones.
+
+![Vista de Inicio](PROYECTO_FINAL_IMAGENES/pantalla_unaveziniciado.png)
+*Figura: Vista de inicio de la aplicación mostrando el resumen general y estadísticas*
 
 ![Método setup_icon](PROYECTO_FINAL_IMAGENES/setup_icon.png)
 *Figura: Método setup_icon() que configura el icono de la aplicación*
@@ -286,6 +310,43 @@ Se desarrollaron los modelos de datos que representan las entidades del dominio 
 
 ![Propiedad full_name](PROYECTO_FINAL_IMAGENES/Captura de la propiedad full_name.png)
 *Figura: Propiedad full_name que retorna el nombre completo del participante*
+
+#### Etapa 4: Vista de Gestión de Eventos
+
+Se desarrolló la vista completa de gestión de eventos, permitiendo crear, editar, eliminar y buscar eventos de manera intuitiva.
+
+![Vista de Eventos](PROYECTO_FINAL_IMAGENES/eventos_view.png)
+*Figura: Vista de gestión de eventos mostrando la tabla de eventos y opciones de acción*
+
+#### Etapa 5: Vista de Gestión de Participantes
+
+Se implementó la vista de gestión de participantes, que permite administrar toda la información de los participantes del sistema.
+
+![Vista de Participantes](PROYECTO_FINAL_IMAGENES/participantes_view.png)
+*Figura: Vista de gestión de participantes mostrando la tabla con todos los participantes*
+
+#### Etapa 6: Vista de Inscripciones
+
+Se desarrolló la vista de inscripciones, que permite gestionar las inscripciones de participantes a eventos, con control de aforo y validaciones.
+
+![Vista de Inscripciones](PROYECTO_FINAL_IMAGENES/incripciones_view.png)
+*Figura: Vista de gestión de inscripciones mostrando las inscripciones activas*
+
+![Proceso de Inscripción](PROYECTO_FINAL_IMAGENES/incribirse.png)
+*Figura: Formulario de inscripción de un participante a un evento*
+
+![Inscripción Exitosa](PROYECTO_FINAL_IMAGENES/inscribirse_correctamente.png)
+*Figura: Confirmación de inscripción exitosa a un evento*
+
+![Mensaje de Registro Correcto](PROYECTO_FINAL_IMAGENES/mensaje_registro_correcto.png)
+*Figura: Mensaje de confirmación tras registrar un participante correctamente*
+
+#### Etapa 7: Vista de Reportes y Exportación
+
+Se implementó la funcionalidad de exportación de datos a CSV y PDF, permitiendo generar reportes de eventos, participantes e inscripciones.
+
+![Ventana de Reportes y Exportación](PROYECTO_FINAL_IMAGENES/ventana_reportes_exportar.png)
+*Figura: Vista de reportes mostrando las opciones de exportación a CSV y PDF*
 
 ### 3.3. Fase 3: Implementación de Concurrencia y Optimización
 
