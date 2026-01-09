@@ -19,6 +19,9 @@
 
 1. [Introducción](#introducción)
 2. [Objetivos](#1-objetivos)
+   - [1.1. Sistema de Permisos y Roles](#11-sistema-de-permisos-y-roles)
+     - [1.1.1. Permisos del Administrador](#111-permisos-del-administrador)
+     - [1.1.2. Permisos del Usuario](#112-permisos-del-usuario)
 3. [Recursos Software y Hardware](#2-recursos-software-y-hardware)
    - [2.1. Software](#21-software)
    - [2.2. Hardware](#22-hardware)
@@ -71,6 +74,85 @@ Además, se incorporará la funcionalidad de soporte para múltiples usuarios si
 El propósito fundamental de este Trabajo de Fin de Grado es profundizar en el desarrollo de aplicaciones de escritorio y explorar el uso de tecnologías modernas en Python. Asimismo, se pretende poner en práctica diversos conceptos adquiridos durante el curso de mi formación en grado superior de informática. A través de este proyecto, se espera adquirir experiencia en el uso de herramientas como MySQL para bases de datos relacionales, Tkinter para interfaces gráficas, y sistemas avanzados de gestión de concurrencia.
 
 Adicionalmente, este proyecto me permitirá desarrollar habilidades en arquitectura de software, específicamente en el patrón Modelo-Vista-Controlador (MVC), gestión de bases de datos relacionales, programación orientada a objetos, y resolución de problemas complejos de concurrencia en sistemas multi-usuario.
+
+### 1.1. Sistema de Permisos y Roles
+
+La aplicación implementa un sistema de autenticación y autorización basado en dos roles principales: **administrador** y **usuario**. Cada rol tiene permisos específicos que determinan qué acciones puede realizar en el sistema.
+
+#### 1.1.1. Permisos del Administrador
+
+El rol de **administrador** (`admin`) tiene acceso completo a todas las funcionalidades del sistema:
+
+**Gestión de Eventos:**
+- ✅ Crear nuevos eventos
+- ✅ Editar eventos existentes
+- ✅ Eliminar eventos
+- ✅ Ver todos los eventos
+- ✅ Buscar y filtrar eventos
+
+**Gestión de Participantes:**
+- ✅ Crear nuevos participantes
+- ✅ Editar información de participantes
+- ✅ Eliminar participantes
+- ✅ Ver todos los participantes
+- ✅ Buscar y filtrar participantes
+- ✅ Ver detalles de participantes (al hacer doble clic o usar el botón "Ver"), incluyendo la lista de eventos en los que está inscrito
+
+**Gestión de Inscripciones:**
+- ✅ Ver todas las inscripciones del sistema
+- ✅ Crear inscripciones para cualquier participante en cualquier evento
+- ✅ Eliminar inscripciones
+- ✅ Modificar el estado de las inscripciones (confirmada, cancelada, pendiente)
+- ✅ Filtrar inscripciones por participante, evento o estado
+
+**Gestión de Usuarios:**
+- ✅ Crear nuevos usuarios
+- ✅ Editar usuarios existentes (cambiar rol, contraseña)
+- ✅ Eliminar usuarios
+- ✅ Ver todos los usuarios del sistema
+- ✅ Filtrar usuarios por rol
+
+**Reportes y Exportación:**
+- ✅ Exportar eventos a CSV y PDF
+- ✅ Exportar participantes a CSV y PDF
+- ✅ Exportar inscripciones a CSV y PDF
+- ✅ Generar reporte completo en PDF (incluye eventos, participantes, inscripciones y estadísticas generales)
+
+#### 1.1.2. Permisos del Usuario
+
+El rol de **usuario** (`user`) tiene permisos limitados, enfocados principalmente en la consulta de información y la gestión de sus propias inscripciones:
+
+**Gestión de Eventos:**
+- ✅ Ver todos los eventos (solo lectura)
+- ✅ Buscar y filtrar eventos
+- ❌ No puede crear, editar o eliminar eventos
+
+**Gestión de Participantes:**
+- ✅ Ver todos los participantes (solo lectura)
+- ✅ Buscar y filtrar participantes
+- ✅ Ver detalles de participantes (al hacer doble clic o usar el botón "Ver"), incluyendo la lista de eventos en los que está inscrito cada participante
+- ❌ No puede crear, editar o eliminar participantes
+
+**Gestión de Inscripciones:**
+- ✅ Ver sus propias inscripciones (si tiene un perfil de participante asociado)
+- ✅ Inscribirse en eventos (si tiene un perfil de participante asociado)
+- ❌ No puede ver inscripciones de otros participantes
+- ❌ No puede crear inscripciones para otros participantes
+- ❌ No puede eliminar inscripciones
+- ❌ No puede modificar el estado de las inscripciones
+
+**Gestión de Usuarios:**
+- ✅ Ver todos los usuarios (solo lectura)
+- ✅ Filtrar usuarios por rol
+- ❌ No puede crear, editar o eliminar usuarios
+
+**Reportes y Exportación:**
+- ✅ Exportar eventos a CSV y PDF
+- ✅ Exportar participantes a CSV y PDF
+- ✅ Exportar inscripciones a CSV y PDF
+- ✅ Generar reporte completo en PDF (incluye eventos, participantes, inscripciones y estadísticas generales)
+
+**Nota importante:** Para que un usuario pueda inscribirse en eventos, debe tener un perfil de participante asociado a su nombre de usuario. Si un usuario no tiene un perfil de participante asociado, recibirá un mensaje indicando que debe contactar al administrador para asociar su usuario con un participante.
 
 ---
 
@@ -207,7 +289,78 @@ python-dotenv ha sido utilizado para la gestión de configuración mediante vari
 ![Configuración de la Aplicación](PROYECTO_FINAL_IMAGENES/APP_CONFIG.png)
 *Figura: Configuración general de la aplicación*
 
-#### 2.1.8. GitHub y Git
+#### 2.1.8. Configuración de la Base de Datos
+
+Para que la aplicación funcione correctamente, es necesario configurar la base de datos MySQL. A continuación se detallan los pasos necesarios:
+
+**Paso 1: Instalación de MySQL Server**
+
+1. Descargar e instalar MySQL Server 8.0 o superior desde [https://dev.mysql.com/downloads/mysql/](https://dev.mysql.com/downloads/mysql/)
+2. Durante la instalación, configurar una contraseña para el usuario `root` o crear un usuario específico para la aplicación
+3. Asegurarse de que el servicio MySQL esté ejecutándose
+
+**Paso 2: Creación de la Base de Datos**
+
+1. Abrir MySQL Workbench, phpMyAdmin o cualquier cliente MySQL
+2. Conectarse al servidor MySQL con las credenciales configuradas
+3. Ejecutar el script SQL ubicado en `database/schema.sql`:
+   ```sql
+   -- Este script crea automáticamente la base de datos 'eventos_locales'
+   -- y todas las tablas necesarias: users, events, participants, 
+   -- event_registrations y audit_logs
+   ```
+4. El script `schema.sql` incluye:
+   - Creación de la base de datos `eventos_locales`
+   - Creación de todas las tablas con sus relaciones y restricciones
+   - Inserción del usuario administrador por defecto (username: `ADMIN`, contraseña: `ADMINISTRADOR`)
+   - Datos de ejemplo para desarrollo y pruebas (opcional)
+
+**Paso 3: Configuración de Variables de Entorno**
+
+La aplicación utiliza el archivo `.env` para almacenar las credenciales de la base de datos de forma segura. Para configurarlo:
+
+1. Crear un archivo llamado `.env` en la raíz del proyecto (al mismo nivel que `config/`)
+2. Agregar las siguientes variables con los valores correspondientes a tu instalación de MySQL:
+
+```env
+# Configuración de Base de Datos MySQL
+DB_HOST=localhost
+DB_PORT=3306
+DB_USER=root
+DB_PASSWORD=tu_contraseña_mysql
+DB_NAME=eventos_locales
+```
+
+**Valores por defecto (si no se crea el archivo .env):**
+- `DB_HOST`: localhost
+- `DB_PORT`: 3309
+- `DB_USER`: root
+- `DB_PASSWORD`: root
+- `DB_NAME`: eventos_locales
+
+**Nota importante:** Si tu instalación de MySQL utiliza un puerto diferente al 3306 (por defecto) o 3309, asegúrate de especificarlo en `DB_PORT`. También es recomendable crear un usuario específico para la aplicación en lugar de usar `root` por razones de seguridad.
+
+**Paso 4: Verificación de la Conexión**
+
+1. Ejecutar la aplicación: `python src/main.py`
+2. Si la conexión es exitosa, se mostrará la ventana de login
+3. Si hay un error de conexión, verificar:
+   - Que MySQL Server esté ejecutándose
+   - Que las credenciales en el archivo `.env` sean correctas
+   - Que el puerto especificado sea el correcto
+   - Que la base de datos `eventos_locales` exista y tenga todas las tablas creadas
+
+**Credenciales por defecto del administrador:**
+- Usuario: `ADMIN`
+- Contraseña: `ADMINISTRADOR`
+
+**Recomendaciones de Seguridad:**
+- No compartir el archivo `.env` en repositorios públicos (ya está incluido en `.gitignore`)
+- Usar un usuario MySQL específico para la aplicación con permisos limitados
+- Cambiar la contraseña del usuario administrador después del primer acceso
+- Realizar copias de seguridad periódicas de la base de datos
+
+#### 2.1.9. GitHub y Git
 
 GitHub se ha utilizado como plataforma de control de versiones para almacenar y gestionar el código fuente del proyecto. Git, como sistema de control de versiones, nos ha permitido realizar un seguimiento de los cambios en el código y revertir a versiones anteriores en caso necesario.
 

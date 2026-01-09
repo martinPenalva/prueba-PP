@@ -503,10 +503,90 @@ class ReportsView:
             traceback.print_exc()
     
     def export_full_report(self):
-        """Exporta un reporte completo en PDF"""
-        messagebox.showinfo(
-            "Información",
-            "El reporte completo está en desarrollo.\n\n"
-            "Por ahora, puedes exportar eventos y participantes por separado."
-        )
+        """Exporta un reporte completo en PDF con eventos, participantes e inscripciones"""
+        if not self.event_controller or not self.participant_controller or not self.registration_controller:
+            messagebox.showwarning("Advertencia", "Modo Demo - No se pueden exportar datos")
+            return
+        
+        try:
+            # Obtener todos los datos
+            events = self.event_controller.get_all() if self.event_controller else []
+            participants = self.participant_controller.get_all() if self.participant_controller else []
+            
+            # Convertir eventos a diccionarios
+            events_data = []
+            for event in events:
+                # Normalizar el status: convertir a string y quitar espacios
+                status = str(event.status).strip() if event.status else 'activo'
+                events_data.append({
+                    'event_id': event.event_id,
+                    'title': event.title,
+                    'description': event.description or '',
+                    'location': event.location or '',
+                    'start_datetime': event.start_datetime,
+                    'end_datetime': event.end_datetime,
+                    'capacity': event.capacity,
+                    'status': status
+                })
+            
+            # Convertir participantes a diccionarios
+            participants_data = []
+            for participant in participants:
+                participants_data.append({
+                    'participant_id': participant.participant_id,
+                    'first_name': participant.first_name,
+                    'last_name': participant.last_name,
+                    'email': participant.email,
+                    'phone': participant.phone or '',
+                    'identifier': participant.identifier
+                })
+            
+            # Obtener todas las inscripciones
+            all_registrations = []
+            for event in events:
+                event_participants = self.registration_controller.get_event_participants(event.event_id)
+                for participant in event_participants:
+                    all_registrations.append({
+                        'ID Evento': event.event_id,
+                        'Evento': event.title,
+                        'ID Participante': participant['participant_id'],
+                        'Participante': f"{participant['first_name']} {participant['last_name']}",
+                        'first_name': participant.get('first_name', ''),
+                        'last_name': participant.get('last_name', ''),
+                        'Email': participant.get('email', ''),
+                        'Teléfono': participant.get('phone', '') or '',
+                        'Fecha Inscripción': participant.get('registered_at', ''),
+                        'Estado': participant.get('registration_status', 'confirmado')
+                    })
+            
+            # Exportar usando PDFExporter
+            filepath = PDFExporter.export_full_report(events_data, participants_data, all_registrations)
+            
+            if filepath:
+                messagebox.showinfo(
+                    "Éxito",
+                    f"Reporte completo exportado correctamente a:\n{filepath}\n\n"
+                    "El archivo se ha guardado en tu ordenador."
+                )
+                # Abrir la carpeta donde se guardó el archivo
+                try:
+                    import subprocess
+                    import platform
+                    if platform.system() == "Windows":
+                        os.startfile(os.path.dirname(filepath))
+                    elif platform.system() == "Darwin":  # macOS
+                        subprocess.Popen(["open", os.path.dirname(filepath)])
+                    else:  # Linux
+                        subprocess.Popen(["xdg-open", os.path.dirname(filepath)])
+                except:
+                    pass
+            elif filepath is None:
+                # Usuario canceló el diálogo
+                pass
+            else:
+                messagebox.showerror("Error", "No se pudo exportar el reporte completo")
+        except Exception as e:
+            messagebox.showerror("Error", f"Error al exportar reporte completo:\n{str(e)}")
+            import traceback
+            traceback.print_exc()
 
