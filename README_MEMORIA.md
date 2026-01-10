@@ -953,6 +953,9 @@ Esta vista es fundamental para el mantenimiento y administración del sistema, p
 ![Vista de Gestión de Usuarios](PROYECTO_FINAL_IMAGENES/usuarios_vista.png)
 *Figura: Vista de gestión de usuarios mostrando la tabla con todos los usuarios del sistema y opciones de acción disponibles para administradores*
 
+![Formulario de Edición de Usuario](PROYECTO_FINAL_IMAGENES/ejemplo_editar_usuario.png)
+*Figura: Formulario de edición de usuario permitiendo modificar el rol y la contraseña del usuario seleccionado*
+
 ### 3.3. Fase 3: Implementación de Concurrencia y Optimización
 
 **Fecha de Inicio:** [Fecha]  
