@@ -14,8 +14,8 @@
 <br>
 
 **Autor:** Martin Peñalva Artázcoz  
-**Tutor/a Académico:** XXXXXXXX  
-**Tutor/a TFG:** XXXXXXXX  
+**Tutor/a Académico:** Daniel Durán Molina  
+**Tutor/a TFG:** Daniel Durán Molina  
 **Pamplona, 2024**
 
 <br>
