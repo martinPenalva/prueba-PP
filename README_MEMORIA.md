@@ -16,7 +16,7 @@
 **Autor:** Martin Peñalva Artázcoz  
 **Tutor/a Académico:** Daniel Durán Molina  
 **Tutor/a TFG:** Daniel Durán Molina  
-**Pamplona, 2024**
+**Pamplona, 2026**
 
 <br>
 
@@ -1660,5 +1660,5 @@ En resumen, el desarrollo de esta aplicación ha sido una experiencia enriqueced
 **Gestor de Eventos Locales - Trabajo de Fin de Grado**
 
 **Autor:** Martin Peñalva Artázcoz  
-**Pamplona, 2024**
+**Pamplona, 2026**
 
